@@ -5,6 +5,7 @@
 function initMap() {
   "use strict";
   
+  // Single site
   var site_BRWCM3 = {
     lat: parseFloat(39.32045),
     lng: parseFloat(-77.74242)
