@@ -15,19 +15,37 @@ var MAP_LOCATIONS = [
 ];
   
 function initSiteMap() {
+  "use strict";
   var infoWindow = new google.maps.InfoWindow();
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 8,
     center: new google.maps.LatLng(39, -78)
   });
   
+  function createMarkerPanel(marker) {
+    // Create the sidebar button
+    var ul = document.getElementById("marker-sidebar");
+    var li = document.createElement("li");
+    var title = marker.title;
+    li.innerHTML = title;
+    ul.appendChild(li);
+    
+    google.maps.event.addDomListener(li, "click", function () {
+      google.maps.event.trigger(marker, "click");
+    });
+    
+  }
+  
   function placeMarker(location) {
     var latLng = new google.maps.LatLng(location[1], location[2]);
     var marker = new google.maps.Marker({
       position: latLng,
-      map: map
+      map: map,
+      title: location[0]
     });
-      
+    
+    createMarkerPanel(marker);
+    
     google.maps.event.addListener(marker, "click", function () {
       infoWindow.close();
       infoWindow.setContent("<div id='info-window'>" + location[0] + "</div>");
