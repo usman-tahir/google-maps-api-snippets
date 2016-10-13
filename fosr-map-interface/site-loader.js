@@ -23,19 +23,6 @@ function initSiteMap() {
     center: new google.maps.LatLng(39, -78)
   });
   
-  function createMarkerPanel(marker) {
-    // Create the sidebar button
-    var ul = document.getElementById("marker-sidebar");
-    var li = document.createElement("li");
-    var title = marker.title;
-    li.innerHTML = title;
-    ul.appendChild(li);
-    
-    google.maps.event.addDomListener(li, "click", function () {
-      google.maps.event.trigger(marker, "click");
-    });
-    
-  }
   
   function placeMarker(location) {
     var latLng = new google.maps.LatLng(location[1], location[2]);
@@ -44,8 +31,6 @@ function initSiteMap() {
       map: map,
       title: location[0]
     });
-    
-    createMarkerPanel(marker);
     
     google.maps.event.addListener(marker, "click", function () {
       var link = "<a href='#'>Generate River Report Card</a>"
